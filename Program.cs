@@ -38,6 +38,24 @@ public class CookiesRecipesApp
    }
 }
 
+public class RecipesUserInteraction
+{
+   public void ShowMessage(string message)
+   {
+      System.Console.WriteLine(message); ;
+   }
+
+   public void Exit()
+   {
+      System.Console.WriteLine("Press any key to exit...");
+      Console.ReadKey();
+   }
+}
+
+public class RecipesRepository
+{
+}
+
 public abstract class Ingredient
 {
    public abstract void Prepare();
