@@ -1,5 +1,23 @@
-﻿
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Net;
+
+var cookiesRecipesApp = new CookiesRecipesApp();
+cookiesRecipesApp.Run();
+
+public class CookiesRecipesApp
+{
+   private readonly RecipesRepository _recipesRepository;
+   private readonly RecipesUserInteraction _recipesUserInteraction;
+
+   public CookiesRecipesApp(RecipesRepository recipesRepository, RecipesUserInteraction recipesUserInteraction)
+   {
+      _recipesRepository = recipesRepository;
+      _recipesUserInteraction = recipesUserInteraction;
+   }
+   public void Run()
+   {
+
+   }
+}
 
 interface INgredient
 {
