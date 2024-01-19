@@ -15,15 +15,27 @@ public class CookiesRecipesApp
    }
    public void Run()
    {
+      var allRecipes = _recipesRepository.GetAll(filePath);
+      _recipesUserInteraction.DisplayRecipes(allRecipes);
+      _recipesUserInteraction.PromptForRecipe();
 
+      var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
+
+      if (ingredients.Count > 0)
+      {
+         var recipes = new Recipe(ingredients);
+         allRecipes.Add(recipes);
+         _recipesRepository.Write(filePath, allRecipes);
+         _recipesUserInteraction.ShowMessage("Recipe added:");
+         _recipesUserInteraction.ShowMessage(recipes.ToString());
+      }
+      else
+      {
+         _recipesUserInteraction.ShowMessage("No ingredients were selected. Recipes will not be saved.");
+      }
+
+      _recipesUserInteraction.Exit();
    }
-}
-
-interface INgredient
-{
-   int Id { get; set; }
-   string Name { get; set; }
-   string Instructions { get; set; }
 }
 
 public abstract class Ingredient
