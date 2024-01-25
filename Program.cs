@@ -8,6 +8,7 @@ public class CookiesRecipesApp
    private readonly IRecipesRepository _recipesRepository;
    private readonly IRecipesUserInteraction _recipesUserInteraction;
 
+   // passing dependency as parameter in constructor (instead of creating them at declaration) to provide flexibility to the code
    public CookiesRecipesApp(IRecipesRepository recipesRepository, IRecipesUserInteraction recipesUserInteraction)
    {
       _recipesRepository = recipesRepository;
@@ -52,7 +53,7 @@ public class RecipesUserInteraction : IRecipesUserInteraction
 {
    public void ShowMessage(string message)
    {
-      System.Console.WriteLine(message); ;
+      System.Console.WriteLine(message);
    }
 
    public void Exit()
@@ -60,48 +61,4 @@ public class RecipesUserInteraction : IRecipesUserInteraction
       System.Console.WriteLine("Press any key to exit...");
       Console.ReadKey();
    }
-}
-
-public class RecipesRepository : IRecipesRepository
-{
-}
-
-public abstract class Ingredient
-{
-   public abstract void Prepare();
-}
-
-public abstract class WheatFlour : Ingredient
-{
-   public override void Prepare() => System.Console.WriteLine("Sieve. Add to other ingredients.");
-}
-
-public abstract class CoconutFlour : Ingredient
-{
-   public override void Prepare() => System.Console.WriteLine("Sieve. Add to other ingredients.");
-}
-
-public abstract class Sugar : Ingredient
-{
-   public override void Prepare() => System.Console.WriteLine("Add to other ingredients.");
-}
-
-public abstract class Chocolate : Ingredient
-{
-   public override void Prepare() => System.Console.WriteLine("Melt in a water bath. Add to other ingredients.");
-}
-
-public abstract class Cardamom : Ingredient
-{
-   public override void Prepare() => System.Console.WriteLine("Take half a teaspoon. Add to other ingredients.");
-}
-
-public abstract class Cinnamon : Ingredient
-{
-   public override void Prepare() => System.Console.WriteLine("Take half a teaspoon. Add to other ingredients.");
-}
-
-public abstract class CocoaPowder : Ingredient
-{
-   public override void Prepare() => System.Console.WriteLine("Take half a teaspoon. Add to other ingredients.");
 }
