@@ -1,7 +1,12 @@
 ﻿using System.Net;
+using cookies_cookbook.Recipes;
+using cookies_cookbook.Recipes.Ingredients;
 
 var cookiesRecipesApp = new CookiesRecipesApp(new RecipesRepository(), new RecipesUserInteraction());
-cookiesRecipesApp.Run();
+
+
+
+cookiesRecipesApp.Run("recipes.txt");
 
 public class CookiesRecipesApp
 {
@@ -14,39 +19,38 @@ public class CookiesRecipesApp
       _recipesRepository = recipesRepository;
       _recipesUserInteraction = recipesUserInteraction;
    }
-   public void Run()
+   public void Run(string filePath)
    {
-      var allRecipes = _recipesRepository.GetAll(filePath);
-      _recipesUserInteraction.DisplayRecipes(allRecipes);
-      _recipesUserInteraction.PromptForRecipe();
+      var allRecipes = _recipesRepository.Read(filePath);
+      _recipesUserInteraction.PrintExistingRecipes(allRecipes);
+      // _recipesUserInteraction.PromptToCreateRecipe();
 
-      var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
+      // var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
 
-      if (ingredients.Count > 0)
-      {
-         var recipes = new Recipe(ingredients);
-         allRecipes.Add(recipes);
-         _recipesRepository.Write(filePath, allRecipes);
-         _recipesUserInteraction.ShowMessage("Recipe added:");
-         _recipesUserInteraction.ShowMessage(recipes.ToString());
-      }
-      else
-      {
-         _recipesUserInteraction.ShowMessage("No ingredients were selected. Recipes will not be saved.");
-      }
+      // if (ingredients.Count > 0)
+      // {
+      //    var recipes = new Recipe(ingredients);
+      //    allRecipes.Add(recipes);
+      //    _recipesRepository.Write(filePath, allRecipes);
+      //    _recipesUserInteraction.ShowMessage("Recipe added:");
+      //    _recipesUserInteraction.ShowMessage(recipes.ToString());
+      // }
+      // else
+      // {
+      //    _recipesUserInteraction.ShowMessage("No ingredients were selected. Recipes will not be saved.");
+      // }
 
       _recipesUserInteraction.Exit();
    }
 }
 
-public interface IRecipesRepository
-{
-}
+
 
 public interface IRecipesUserInteraction
 {
    void ShowMessage(string message);
    void Exit();
+   void PrintExistingRecipes(IEnumerable<Recipe> allRecipes);
 }
 
 public class RecipesUserInteraction : IRecipesUserInteraction
@@ -60,5 +64,49 @@ public class RecipesUserInteraction : IRecipesUserInteraction
    {
       System.Console.WriteLine("Press any key to exit...");
       Console.ReadKey();
+   }
+
+   public void PrintExistingRecipes(IEnumerable<Recipe> allRecipes)
+   {
+      if (allRecipes.Count() > 0)
+      {
+         System.Console.WriteLine($"Existing recipes are: {Environment.NewLine}");
+         var counter = 1;
+         foreach (var recipe in allRecipes)
+
+         {
+            System.Console.WriteLine($"***** {counter}********");
+            System.Console.WriteLine(recipe);
+            System.Console.WriteLine();
+            counter++;
+         }
+      }
+   }
+}
+
+public interface IRecipesRepository
+{
+   List<Recipe> Read(string filePath);
+}
+
+public class RecipesRepository : IRecipesRepository
+{
+   public List<Recipe> Read(string filePath)
+   {
+      return new List<Recipe>
+      {
+         new Recipe(new List<Ingredient>
+         {
+            new WheatFlour(),
+            new Sugar(),
+            new Butter()
+         }),
+         new Recipe(new List<Ingredient>
+         {
+            new CocoaPowder(),
+            new CoconutFlour(),
+            new Cinnamon()
+         })
+      };
    }
 }

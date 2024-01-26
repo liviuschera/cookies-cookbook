@@ -1,0 +1,15 @@
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.AssemblyInfoInputs.cache
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.AssemblyInfo.cs
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.csproj.CoreCompileInputs.cache
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.sourcelink.json
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\bin\Debug\net8.0\cookies-cookbook.exe
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\bin\Debug\net8.0\cookies-cookbook.deps.json
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\bin\Debug\net8.0\cookies-cookbook.runtimeconfig.json
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\bin\Debug\net8.0\cookies-cookbook.dll
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\bin\Debug\net8.0\cookies-cookbook.pdb
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.dll
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\refint\cookies-cookbook.dll
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.pdb
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\cookies-cookbook.genruntimeconfig.cache
+C:\Users\liviu\source\repos\TodoList\cookies-cookbook\obj\Debug\net8.0\ref\cookies-cookbook.dll
