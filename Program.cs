@@ -25,20 +25,20 @@ public class CookiesRecipesApp
       _recipesUserInteraction.PrintExistingRecipes(allRecipes);
       _recipesUserInteraction.PromptToCreateRecipe();
 
-      // var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
+      var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
 
-      // if (ingredients.Count > 0)
-      // {
-      //    var recipes = new Recipe(ingredients);
-      //    allRecipes.Add(recipes);
-      //    _recipesRepository.Write(filePath, allRecipes);
-      //    _recipesUserInteraction.ShowMessage("Recipe added:");
-      //    _recipesUserInteraction.ShowMessage(recipes.ToString());
-      // }
-      // else
-      // {
-      //    _recipesUserInteraction.ShowMessage("No ingredients were selected. Recipes will not be saved.");
-      // }
+      if (ingredients.Count() > 0)
+      {
+         var recipe = new Recipe(ingredients);
+         allRecipes.Add(recipe);
+         // _recipesRepository.Write(filePath, allRecipes);
+         _recipesUserInteraction.ShowMessage("Recipe added:");
+         _recipesUserInteraction.ShowMessage(recipe.ToString());
+      }
+      else
+      {
+         _recipesUserInteraction.ShowMessage("No ingredients were selected. Recipes will not be saved.");
+      }
 
       _recipesUserInteraction.Exit();
    }
@@ -52,6 +52,7 @@ public interface IRecipesUserInteraction
    void Exit();
    void PrintExistingRecipes(IEnumerable<Recipe> allRecipes);
    void PromptToCreateRecipe();
+   IEnumerable<Ingredient> ReadIngredientsFromUser();
 }
 
 public class IngredientsRegister
@@ -65,6 +66,19 @@ public class IngredientsRegister
       new Cinnamon(),
       new CocoaPowder(),
    };
+
+   public Ingredient GetById(int id)
+   {
+      foreach (var ingredient in All)
+      {
+         if (ingredient.Id == id)
+         {
+            return ingredient;
+         }
+      }
+
+      return null;
+   }
 }
 
 public class RecipesConsoleUserInteraction : IRecipesUserInteraction
@@ -111,6 +125,35 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
          System.Console.WriteLine(ingredient);
       }
    }
+
+   public IEnumerable<Ingredient> ReadIngredientsFromUser()
+   {
+      bool shallStop = false;
+      var ingredients = new List<Ingredient>();
+
+      while (!shallStop)
+      {
+         System.Console.WriteLine("Add an ingredient by its ID, " + "or type anything else if finished.");
+
+         var userInput = Console.ReadLine();
+
+         if (int.TryParse(userInput, out int id))
+         {
+            var selectedIngredient = _ingredientsRegister.GetById(id);
+            if (selectedIngredient is not null)
+            {
+               ingredients.Add(selectedIngredient);
+            }
+         }
+         else
+         {
+            shallStop = true;
+         }
+      }
+
+      return ingredients;
+   }
+
 }
 
 public interface IRecipesRepository
